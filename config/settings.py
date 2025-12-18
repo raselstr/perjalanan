@@ -13,6 +13,8 @@ from dotenv import load_dotenv
 from pathlib import Path
 import os, environ, secrets
 
+from .template import  THEME_LAYOUT_DIR, THEME_VARIABLES
+
 load_dotenv()  # Load environment variables from .env file
 
 env = environ.Env(
@@ -35,6 +37,8 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
+ENVIRONMENT = os.environ.get("DJANGO_ENVIRONMENT", default="local")
+
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 
@@ -47,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -64,13 +69,22 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "config.context_processors.my_setting",
+                "config.context_processors.environment",
+            ],
+            "libraries": {
+                "theme": "web_project.template_tags.theme",
+            },
+            "builtins": [
+                "django.templatetags.static",
+                "web_project.template_tags.theme",
             ],
         },
     },
@@ -135,4 +149,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static" / "assets",
+]
+
+THEME_LAYOUT_DIR = THEME_LAYOUT_DIR
+THEME_VARIABLES = THEME_VARIABLES
