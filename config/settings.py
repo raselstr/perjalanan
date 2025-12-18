@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+from dotenv import load_dotenv
 from pathlib import Path
-import os, environ, secrets, dj_database_url
+import os, environ, secrets
+
+load_dotenv()  # Load environment variables from .env file
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -31,7 +33,7 @@ if not SECRET_KEY:
     print("WARNING: Using a randomly generated SECRET_KEY! Set SECRET_KEY in your .env file.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
@@ -87,17 +89,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
-USE_ENV_DATABASE = env.bool("USE_ENV_DATABASE", default=True)
-if USE_ENV_DATABASE:
-    DATABASES = {
-        'default': dj_database_url.config(default=env('DATABASE_URL'))
+DATABASES = {
+    "default": {
+        "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST", "db"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
-else:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=env("DATABASE_URL").replace("@db:", "@localhost:")
-        )
-    }
+}
 
 
 # Password validation
