@@ -12,7 +12,7 @@ env/
 .venv/
 
 # Environment variables
-.env
+
 
 # OS
 .DS_Store
