@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path("", include("apps.dashboard.urls")),
+    path("", include("apps.pages.urls")),
 ]
 
 handler404 = SystemView.as_view(template_name="pages_misc_error.html", status=404)

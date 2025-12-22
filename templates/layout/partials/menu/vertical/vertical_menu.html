@@ -19,8 +19,7 @@
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
-
-    <li class="menu-item {% if 'index' == request.resolver_match.url_name or '/dashbord/' in request.path %}active open{% endif %}">
+    <!-- <li class="menu-item {% if 'index' == request.resolver_match.url_name or '/dashbord/' in request.path %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base bx bx-home-smile"></i>
         <div class="text-truncate">Dashboards</div>
@@ -57,43 +56,28 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
     <!-- Layouts -->
-    <li class="menu-item {% if '/layouts/' in request.path  %}active open{% endif %}">
+    <li class="menu-item {% if '/account_settings/' in request.path  %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base bx bx-layout"></i>
-        <div class="text-truncate">Layouts</div>
+        <div class="text-truncate">Tes</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item {% if '/without_menu/' in request.path %}active{% endif %}">
-          <a href="" class="menu-link">
+        <li class="menu-item {% if '/account/' in request.path %}active{% endif %}">
+          <a href="{% url 'pages-account-settings-account' %}" class="menu-link">
             <div class="text-truncate">Without menu</div>
           </a>
         </li>
-        <li class="menu-item {% if '/without_navbar/' in request.path %}active{% endif %}">
-          <a href="" class="menu-link">
+        <li class="menu-item {% if '/notifications/' in request.path %}active{% endif %}">
+          <a href="{% url 'pages-account-settings-notifications' %}" class="menu-link">
             <div class="text-truncate">Without navbar</div>
-          </a>
-        </li>
-        <li class="menu-item {% if '/fluid/' in request.path %}active{% endif %}">
-          <a href="" class="menu-link">
-            <div class="text-truncate">Fluid</div>
-          </a>
-        </li>
-        <li class="menu-item {% if '/container/' in request.path %}active{% endif %}">
-          <a href="" class="menu-link">
-            <div class="text-truncate">Container</div>
-          </a>
-        </li>
-        <li class="menu-item {% if '/blank/' in request.path %}active{% endif %}">
-          <a href="" class="menu-link">
-            <div class="text-truncate">Blank</div>
           </a>
         </li>
       </ul>
     </li>
     
-    <li class="menu-header small text-uppercase">
+    <!-- <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Misc</span>
     </li>
 
@@ -108,7 +92,7 @@
         <i class="menu-icon icon-base bx bx-file"></i>
         <div class="text-truncate">Documentation</div>
       </a>
-    </li>
+    </li> -->
 
   </ul>
 

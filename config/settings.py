@@ -45,6 +45,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,7 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.dashboard',
     'apps.pegawai',
+    'apps.pages',
+    # 'apps.accounts',   
+     
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
