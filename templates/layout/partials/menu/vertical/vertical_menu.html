@@ -58,7 +58,7 @@
       </ul>
     </li> -->
     <!-- Layouts -->
-    <li class="menu-item {% if '/account_settings/' in request.path  %}active open{% endif %}">
+    <!-- <li class="menu-item {% if '/account_settings/' in request.path  %}active open{% endif %}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base bx bx-layout"></i>
         <div class="text-truncate">Tes</div>
@@ -75,8 +75,27 @@
           </a>
         </li>
       </ul>
-    </li>
-    
+    </li> -->
+      {% for item in sidebar_menus %}
+        <li class="menu-item {% if item.is_open %}active open{% endif %}">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon {{ item.menu.icon }}"></i>
+            <div class="text-truncate">{{ item.menu.name }}</div>
+          </a>
+
+          {% if item.submenus %}
+          <ul class="menu-sub">
+            {% for sub in item.submenus %}
+              <li class="menu-item {% if request.path == sub.url %}active{% endif %}">
+                <a href="{{ sub.url }}" class="menu-link">
+                  <div class="text-truncate">{{ sub.name }}</div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
     <!-- <li class="menu-header small text-uppercase">
       <span class="menu-header-text">Misc</span>
     </li>
@@ -93,7 +112,6 @@
         <div class="text-truncate">Documentation</div>
       </a>
     </li> -->
-
   </ul>
 
 

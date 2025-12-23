@@ -84,6 +84,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 "config.context_processors.my_setting",
                 "config.context_processors.environment",
+                'apps.accounts.context_processors.sidebar_menu',
             ],
             "libraries": {
                 "theme": "web_project.template_tags.theme",
